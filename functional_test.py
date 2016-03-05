@@ -13,10 +13,10 @@ class NewVistorTest(unittest.TestCase):
         #Alice heard that there is a cool web app used to to-do list
         #she go to the home page
         self.browser.get('http://127.0.0.1:8000')
-        #time.sleep(3)
+        time.sleep(1)
         #she found the title contains 'To-Do'
         self.assertIn('To-Do', self.browser.title)
-        self.fail("Test paused!")
+        
         
         #she click the botton to add a to-do item
         
@@ -28,5 +28,7 @@ class NewVistorTest(unittest.TestCase):
         
         #she click the list botton, and the app return the to-do items as a list
 
+        self.fail("Test paused!")
+        
 if __name__ == '__main__':
     unittest.main()
