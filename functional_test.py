@@ -30,17 +30,25 @@ class NewVistorTest(unittest.TestCase):
         inputbox.send_keys('Buy peacock feathers')
         #she input Enter, then the app prompts her to add a new one
         inputbox.send_keys(Keys.ENTER)
-        
+        #time.sleep(3)
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text == '1: Buy peacock feathers' for row in rows),
-            "New to-do item did not appear in table"
-        )
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
         
+
+        inputbox = self.browser.find_element_by_id('id_new_item')
         #she add another item
+        inputbox.send_keys('Buy another peacock feathers')
+        #she input Enter, then the app prompts her to add a new one
+        inputbox.send_keys(Keys.ENTER)
+        #time.sleep(3)
         
-        #she found a link which linked to to-do list
+        #she found the 2 items are in the to-do list
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+        self.assertIn('2: Buy another peacock feathers', [row.text for row in rows])
+    
         
         #she click the list botton, and the app return the to-do items as a list
         time.sleep(3)
