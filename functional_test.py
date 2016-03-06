@@ -9,7 +9,12 @@ class NewVistorTest(unittest.TestCase):
         
     def tearDown(self):
         self.browser.quit()
-        
+    
+    def check_for_row_in_list_table(self, item):
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn(item, [row.text for row in rows])
+    
     def test_can_start_a_list_and_retrieve_it_later(self):
         #Alice heard that there is a cool web app used to to-do list
         #she go to the home page
@@ -31,23 +36,17 @@ class NewVistorTest(unittest.TestCase):
         #she input Enter, then the app prompts her to add a new one
         inputbox.send_keys(Keys.ENTER)
         #time.sleep(3)
-        table = self.browser.find_element_by_id('id_list_table')
-        rows = table.find_elements_by_tag_name('tr')
-        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+        self.check_for_row_in_list_table('1: Buy peacock feathers')
         
 
         inputbox = self.browser.find_element_by_id('id_new_item')
         #she add another item
         inputbox.send_keys('Buy another peacock feathers')
-        #she input Enter, then the app prompts her to add a new one
         inputbox.send_keys(Keys.ENTER)
         #time.sleep(3)
-        
         #she found the 2 items are in the to-do list
-        table = self.browser.find_element_by_id('id_list_table')
-        rows = table.find_elements_by_tag_name('tr')
-        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
-        self.assertIn('2: Buy another peacock feathers', [row.text for row in rows])
+        self.check_for_row_in_list_table('1: Buy peacock feathers')
+        self.check_for_row_in_list_table('2: Buy another peacock feathers')
     
         
         #she click the list botton, and the app return the to-do items as a list
