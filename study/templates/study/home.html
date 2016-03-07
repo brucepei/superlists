@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Study Home</title>
+</head>
+
+<body>
+    <h1>Study Django</h1>
+
+    <form method="post">
+        <input type="textbox" name="item_text" id="id_cmd" placeholder="Enter a command" />
+        <br/>
+        {% csrf_token %}
+        <input type="reset" value="Reset" />
+        <input type="submit" value="Submit" />
+    </form>
+    <table id="id_result">
+        <tr>
+            <td>1: </td>
+        </tr>
+    </table>
+    </table>
+</body>
+</html>
