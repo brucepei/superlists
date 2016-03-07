@@ -19,9 +19,9 @@ class HomePageTest(TestCase):
         self.assertIn(b'<title>To-Do lists</title>', response.content)
         self.assertTrue(response.content.endswith(b'</html>'), "home_page ends with 'html/>'")
         #print "content: {}".format(repr(response.content.decode()))
-        #print "template: {}".format(repr(render_to_string('home.html')))
+        #print "template: {}".format(repr(render_to_string('lists/home.html')))
         self.assertEqual(
-            response.content.decode(), render_to_string('home.html', request=request),
+            response.content.decode(), render_to_string('lists/home.html', request=request),
             "home_page entirely matched with template"
         )
         
@@ -34,11 +34,11 @@ class HomePageTest(TestCase):
         
         self.assertIn("A new list item", response.content.decode())
         #print "response: {}".format(response.content.decode())
-        #print "context: {}".format(repr(render_to_string('home.html', request=request, context={
+        #print "context: {}".format(repr(render_to_string('lists/home.html', request=request, context={
         #        'new_item_text': request.POST['item_text'],
         #    })))
         self.assertEqual(
-            response.content.decode(), render_to_string('home.html', request=request, context={
+            response.content.decode(), render_to_string('lists/home.html', request=request, context={
                 'new_item_text': request.POST['item_text'],
             }),
             "post a request with to-do item return a page equals the home_page with variable replaced"
